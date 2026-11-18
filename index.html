@@ -1,0 +1,203 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JELLYBLINK - BLACKPINK Music</title>
+
+    <!-- Menghubungkan CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- LOGIN PAGE -->
+    <div id="authPage" class="auth-page">
+        <div class="auth-card">
+            <h1>JELLYBLINK</h1>
+            <p class="auth-subtitle">YOUR BLACKPINK MUSIC WORLD 🖤💗</p>
+
+            <div id="registerForm">
+                <h2>Create Account</h2>
+                <input id="regUsername" type="text" placeholder="Username">
+                <input id="regPassword" type="password" placeholder="Password">
+                <button onclick="register()">REGISTER</button>
+                <p>Sudah punya akun? <a onclick="switchAuth()">Login</a></p>
+            </div>
+
+            <div id="loginForm" class="hidden">
+                <h2>Welcome Back!</h2>
+                <input id="loginUsername" type="text" placeholder="Username">
+                <input id="loginPassword" type="password" placeholder="Password">
+                <button onclick="login()">LOGIN</button>
+                <p>Belum punya akun? <a onclick="switchAuth()">Register</a></p>
+            </div>
+
+            <p id="authMessage"></p>
+        </div>
+    </div>
+
+    <!-- MAIN APP -->
+    <div id="mainApp" class="app hidden">
+
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <h1 class="logo">♫ JELLYBLINK</h1>
+
+            <div class="menu">
+                <h3>MENU</h3>
+                <a href="#home">⌂ Home</a>
+                <a href="#artists">♬ Artists</a>
+                <a href="#songs">♫ Songs</a>
+                <a href="#albums">▣ Albums</a>
+            </div>
+
+            <div class="library">
+                <h3>YOUR LIBRARY</h3>
+                <a onclick="filterArtist('BLACKPINK')">BLACKPINK</a>
+                <a onclick="filterArtist('JISOO')">JISOO</a>
+                <a onclick="filterArtist('JENNIE')">JENNIE</a>
+                <a onclick="filterArtist('ROSÉ')">ROSÉ</a>
+                <a onclick="filterArtist('LISA')">LISA</a>
+            </div>
+
+            <button class="logout-btn" onclick="logout()">LOGOUT</button>
+        </aside>
+
+        <!-- CONTENT -->
+        <main class="content" id="home">
+
+            <header class="topbar">
+                <div>
+                    <h2>Good evening, BLINK! 🖤💗</h2>
+                    <p>Welcome to your pink music world.</p>
+                </div>
+                <div class="profile" id="profileName">BLINK</div>
+            </header>
+
+            <!-- SEARCH -->
+            <input
+                type="search"
+                id="searchInput"
+                placeholder="Cari lagu atau artis..."
+                oninput="searchSongs()"
+            >
+
+            <!-- HERO -->
+            <section class="hero">
+                <div class="hero-text">
+                    <span>FEATURED ARTIST</span>
+                    <h1>BLACKPINK</h1>
+                    <p>JISOO • JENNIE • ROSÉ • LISA</p>
+                    <button onclick="filterArtist('BLACKPINK')">
+                        EXPLORE MUSIC
+                    </button>
+                </div>
+                <div class="hero-label">BORN PINK</div>
+            </section>
+
+            <!-- ARTISTS -->
+            <section id="artists">
+                <h2 class="section-title">Your Favorite Artists</h2>
+
+                <div class="artist-grid">
+
+                    <div class="artist-card" onclick="filterArtist('BLACKPINK')">
+                        <img src="https://placehold.co/300x300/30202d/ff91c5?text=BLACKPINK" alt="BLACKPINK">
+                        <h3>BLACKPINK</h3>
+                        <p>Girl Group</p>
+                    </div>
+
+                    <div class="artist-card" onclick="filterArtist('JISOO')">
+                        <img src="https://placehold.co/300x300/30202d/ff91c5?text=JISOO" alt="JISOO">
+                        <h3>JISOO</h3>
+                        <p>Solo Artist</p>
+                    </div>
+
+                    <div class="artist-card" onclick="filterArtist('JENNIE')">
+                        <img src="https://placehold.co/300x300/30202d/ff91c5?text=JENNIE" alt="JENNIE">
+                        <h3>JENNIE</h3>
+                        <p>Solo Artist</p>
+                    </div>
+
+                    <div class="artist-card" onclick="filterArtist('ROSÉ')">
+                        <img src="https://placehold.co/300x300/30202d/ff91c5?text=ROSE" alt="ROSE">
+                        <h3>ROSÉ</h3>
+                        <p>Solo Artist</p>
+                    </div>
+
+                    <div class="artist-card" onclick="filterArtist('LISA')">
+                        <img src="https://placehold.co/300x300/30202d/ff91c5?text=LISA" alt="LISA">
+                        <h3>LISA</h3>
+                        <p>Solo Artist</p>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- SONGS -->
+            <section id="songs">
+                <div class="song-heading">
+                    <h2 class="section-title" id="songTitle">Popular Songs</h2>
+                    <button class="reset-btn" onclick="showAllSongs()">SEE ALL</button>
+                </div>
+
+                <div id="songList" class="song-list"></div>
+            </section>
+
+            <!-- ALBUMS -->
+            <section id="albums">
+                <h2 class="section-title">Featured Albums</h2>
+
+                <div class="album-grid">
+                    <div class="album-card">
+                        <img src="https://placehold.co/300x300/30202d/ff91c5?text=BORN+PINK" alt="Born Pink">
+                        <h3>BORN PINK</h3>
+                        <p>BLACKPINK • 2022</p>
+                    </div>
+
+                    <div class="album-card">
+                        <img src="https://placehold.co/300x300/30202d/ff91c5?text=THE+ALBUM" alt="The Album">
+                        <h3>THE ALBUM</h3>
+                        <p>BLACKPINK • 2020</p>
+                    </div>
+
+                    <div class="album-card">
+                        <img src="https://placehold.co/300x300/30202d/ff91c5?text=ME" alt="Me">
+                        <h3>ME</h3>
+                        <p>JISOO • 2023</p>
+                    </div>
+
+                    <div class="album-card">
+                        <img src="https://placehold.co/300x300/30202d/ff91c5?text=R" alt="R">
+                        <h3>R</h3>
+                        <p>ROSÉ • 2021</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SPOTIFY PLAYER -->
+            <section class="spotify-section">
+                <h2 class="section-title">Listen to BLACKPINK</h2>
+
+                <iframe
+                    src="https://open.spotify.com/embed/artist/41MozSoPIsD1dJM0CLPjZF?utm_source=generator"
+                    width="100%"
+                    height="352"
+                    frameborder="0"
+                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                    loading="lazy">
+                </iframe>
+            </section>
+
+            <footer>
+                <p>Made with 🖤💗 for BLINK | JELLYBLINK</p>
+            </footer>
+
+        </main>
+    </div>
+
+    <!-- Menghubungkan JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>
